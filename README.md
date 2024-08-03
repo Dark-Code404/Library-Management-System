@@ -1,69 +1,104 @@
-Overview
+
+# To Run this project follow these steps
+## Overview
+
 This project is a Library Management System (LMS) built with Django. It allows users to manage book inventories, issue books, and handle user registrations and logins.
 
-Prerequisites
+## Prerequisites
+
 Python 3.8 or higher
+
 Django 4.x
+
 PostgreSQL (or another database if configured)
+
 pip (Python package manager)
 
 
-
 if you want to use virtual environment  if not skip {
-
-Virtual Environment Setup Guide
+-
+virtual Environment Setup Guide
 Virtual environments allow you to create isolated Python environments for your projects, ensuring that dependencies are managed separately for each project.
 
-1. Installation
+## 1. Installation
 
----> Windows
-Install Python:
+* ## Windows
+
+#### Install Python:
+
 Ensure Python is installed and added to your system PATH. Download from python.org if needed.
 
-Install Virtualenv:
-Open Command Prompt or PowerShell and run : pip install virtualenv
+#### i. Install Virtualenv:
+Open Command Prompt or PowerShell and run :
+
+```bash
+ pip install virtualenv
+```
+
+#### ii. Create a Virtual Environment : 
+```
+python -m venv venv
+```
+
+### Activate the Virtual Environment:
+
+Command Prompt : 
+```
+venv\Scripts\activate
+```
+
+PowerShell : 
+```
+venv\Scripts\Activate.ps1
+```
 
 
-Create a Virtual Environment : python -m venv venv
 
-Activate the Virtual Environment:
-
-Command Prompt : venv\Scripts\activate
-
-PowerShell : venv\Scripts\Activate.ps1
-
-
-
----> macOS and Linux  
+* ## macOS and Linux
+  
 
 
 Python should be pre-installed. Verify with : python3 --version
 
-Install Virtualenv : pip install virtualenv
+Install Virtualenv :
+
+ ````
+ pip install virtualenv
+ ````
 
 
 Create a Virtual Environment:
 
 Using venv:
 
-
+```
 python3 -m venv venv
+```
 
 Using virtualenv : virtualenv venv
 
-Activate the Virtual Environment : source venv/bin/activate
+### 2. Activate the Virtual Environment : 
 
+```
+source venv/bin/activate
+```
 }
+-
 
 
 
-Setup and Installation
+
+# Setup and Installation
+```
 1. Clone the Repository :
+
      git clone https://github.com/yourusername/your-repository-name.git
       cd your-repository-name
 
 2. Install Dependencies
+
      pip install -r requirements.txt
+
 
 
 3. Configure Settings
@@ -101,4 +136,6 @@ Setup and Installation
 
 7. Run the Development Server
       python manage.py runserver
+      
+```
 
