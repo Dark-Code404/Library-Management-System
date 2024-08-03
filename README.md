@@ -58,8 +58,10 @@ venv\Scripts\Activate.ps1
   
 
 
-Python should be pre-installed. Verify with : python3 --version
-
+Python should be pre-installed. Verify with :
+```   
+python3 --version
+```   
 Install Virtualenv :
 
  ````
@@ -75,8 +77,10 @@ Using venv:
 python3 -m venv venv
 ```
 
-Using virtualenv : virtualenv venv
-
+Using virtualenv :
+```   
+virtualenv venv
+```
 ### 2. Activate the Virtual Environment : 
 
 ```
