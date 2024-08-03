@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
+   
+    <nav class="w-full max-w-5xl">
+      {% include 'nav.html' %}
+    </nav>
+
+    <!-- Title of the page -->
+    <header class="flex flex-row justify-between items-end mb-5 w-full max-w-5xl p-2">
+      <h1 class="font-bold text-lg sm:text-xl capitalize">
+        {% block heading %}{% endblock heading %}
+      </h1>
+      
+      {% if user.is_anonymous %}
+      <h2 class="text-red-400 sm:pr-5 xl:pr-3">logged out</h2>
+      {% else %}
+      <h2 class="text-green-400">logged in as {{user}}</h2>
+      {% endif %}
+    </header>
+    
+    <section class="w-full max-w-5xl p-2">
+      {% for message in messages %}
+      <h3
+        {% if message.tags %}
+        class="p-2 font-bold tracking-wider text-lg {{ message.tags }}"
+        {% endif %}
+      >
+        {{message}}
+      </h3>
+      {% endfor %}
+    </section>
+    
+    <!-- Content -->
+    <main class="w-full max-w-5xl p-2">
+      {% block content %}{% endblock content %}
+    </main> 
+  
+  </body>
+</html>

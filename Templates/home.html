@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold text-center mb-8">Books List</h1>
+
+<!-- Category Links -->
+<div class="flex space-x-4 mb-8 justify-center">
+    <a href="?category=all" class="text-gray-800 bg-gray-200 border border-gray-300 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:bg-gray-300 {% if not selected_category %}font-bold{% endif %}">All Categories</a>
+    {% for category in categories %}
+    <a href="?category={{ category }}" class="text-gray-800 bg-gray-200 border border-gray-300 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:bg-gray-300 {% if selected_category == category %}font-bold{% endif %}">{{ category }}</a>
+    {% endfor %}
+</div>
+
+<!-- Search and Sorting Forms -->
+<form class="flex sm:flex-row flex-col" action="/search/">
+    <!-- Search form content -->
+</form>
+
+<form class="flex flex-col sm:flex-row sm:space-x-4 mt-8 sm:items-center" action="/sort/">
+    <!-- Sorting form content -->
+</form>
+
+<!-- Books List -->
+<ul class="mt-10 md:px-4 lg:px-12 xl:px-0 grid grid-cols-2 md:grid-cols-4 justify-items-center">
+    {% for book in books %}
+    <li class="px-2">
+        <h2 class="text-md font-bold">Book name &nbsp;: &nbsp; {{ book.name }}</h2>
+        <h2 class="text-md font-bold">Book author &nbsp; : &nbsp; {{ book.author }}</h2>
+        <img src="{{ book.image.url }}" alt="{{ book.name }}" class="mb-4 w-32 h-32 object-cover cursor-pointer" data-fullscreen-src="{{ book.image.url }}" />
+        {% if book.available_copies > 0 %}
+        <p class="text-green-500 font-medium">Available Copies: {{ book.available_copies }}</p>
+        {% if not user.is_superuser and not user.is_anonymous %}
+        <a class="hover:shadow-md rounded text-blue-500 underline" href="{% url 'request-book-issue' book.id %}">Request Issue</a>
+        {% endif %}
+        {% else %}
+        <p class="text-red-500 font-medium">No Copies Available</p>
+        {% endif %}
+        {% if user.is_superuser %}
+        <a href="/admin/library/book/{{ book.id }}/change/" class="text-white hover:shadow-md rounded bg-blue-500 px-4 py-1">Edit</a>
+        {% endif %}
+    </li>
+    {% empty %}
+    <h2>No Books Found</h2>
+    {% endfor %}
+</ul>
+
+<script>
+  const images = document.querySelectorAll('img[data-fullscreen-src]');
+
+  images.forEach(image => {
+    image.addEventListener('click', () => {
+      const src = image.getAttribute('data-fullscreen-src');
+      const fullscreenImage = document.createElement('img');
+      fullscreenImage.src = src;
+      fullscreenImage.style.position = 'fixed';
+      fullscreenImage.style.top = '0';
+      fullscreenImage.style.left = '0';
+      fullscreenImage.style.width = '100vw';
+      fullscreenImage.style.height = '100vh';
+      fullscreenImage.style.objectFit = 'contain';
+      fullscreenImage.style.zIndex = '1000';
+      fullscreenImage.style.cursor = 'pointer';
+      fullscreenImage.onclick = () => {
+        document.body.removeChild(fullscreenImage);
+      };
+      document.body.appendChild(fullscreenImage);
+    });
+  });
+
+  // Sort type option selection
+  const options = document.querySelectorAll("#sort_type option");
+  options.forEach((option) => {
+    if (option.textContent === "{{selected | escapejs}}") {
+      option.selected = true;
+    }
+  });
+</script>
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="w-full max-w-lg mx-auto mt-8">
+  <h1 class="text-2xl font-bold text-center mb-8">Signup</h1>
+
+  <form class="flex flex-col space-y-4" action="/student/signup/" method="POST">
+    {% csrf_token %}
+    
+    <div class="flex flex-col space-y-2">
+      <label class="text-xl" for="firstname">Firstname</label>
+      <input
+        class="px-3 py-2 bg-transparent border border-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        name="firstname"
+        type="text"
+        id="firstname"
+        placeholder="Firstname"
+      />
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label class="text-xl" for="lastname">Lastname</label>
+      <input
+        class="px-3 py-2 bg-transparent border border-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        name="lastname"
+        type="text"
+        id="lastname"
+        placeholder="Lastname"
+      />
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label class="text-xl" for="studentID">StudentID</label>
+      <input
+        class="px-3 py-2 bg-transparent border border-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        name="studentID"
+        type="text"
+        id="studentID"
+        placeholder="StudentID"
+      />
+      <p id="studentID-error" class="hidden text-red-400">ID either incomplete or exists</p>
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label class="text-xl" for="password">Password</label>
+      <input
+        class="px-3 py-2 bg-transparent border border-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        name="password"
+        type="password"
+        id="password"
+        placeholder="Password"
+      />
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label class="text-xl" for="department">Department</label>
+      <select
+        class="rounded border border-gray-300 text-black py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+        name="department"
+        id="department"
+      >
+        <option value="">Select a dept</option>
+        {% for dept in departments %}
+        <option value="{{dept.id}}">{{dept}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <button class="text-white hover:shadow-md text-xl rounded bg-green-500 px-4 py-2 mt-4" type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+const users = "{{ users|escapejs }}";
+const idField = document.querySelector('#studentID');
+const idError = document.querySelector('#studentID-error');
+
+idField.addEventListener('input', () => {
+  idError.classList.add('hidden');
+  if (users.includes(idField.value)) {
+    idError.classList.remove('hidden');
+  }
+});
+</script>
+{% endblock content %}
