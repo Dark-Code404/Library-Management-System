@@ -5,12 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Management</title>
+    {% load static %}
     <link
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <style>
+      .bg-overlay {
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.6),  
+            rgba(0, 0, 0, 0.6)  
+          ),
+          url('{% static "img/vishwanth-pindiboina-lOPp5d6Wo3M-unsplash.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* Make the image section cover the viewport height */
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
+  <body class="min-h-screen text-white flex flex-col items-center justify-center bg-overlay">
    
     <nav class="w-full max-w-5xl">
       {% include 'nav.html' %}
