@@ -19,18 +19,18 @@
           url('{% static "img/vishwanth-pindiboina-lOPp5d6Wo3M-unsplash.jpg" %}');
         background-size: cover;
         background-position: center;
-        height: 100vh; /* Make the image section cover the viewport height */
+        min-height: 100vh; /* Ensure it covers at least the viewport height */
       }
     </style>
   </head>
   <body class="min-h-screen text-white flex flex-col items-center justify-center bg-overlay">
    
-    <nav class="w-full max-w-5xl">
+    <nav class="w-full max-w-5xl px-4">
       {% include 'nav.html' %}
     </nav>
 
     <!-- Title of the page -->
-    <header class="flex flex-row justify-between items-end mb-5 w-full max-w-5xl p-2">
+    <header class="flex flex-row justify-between items-end mb-5 w-full max-w-5xl p-4">
       <h1 class="font-bold text-lg sm:text-xl capitalize">
         {% block heading %}{% endblock heading %}
       </h1>
@@ -42,7 +42,7 @@
       {% endif %}
     </header>
     
-    <section class="w-full max-w-5xl p-2">
+    <section class="w-full max-w-5xl px-4">
       {% for message in messages %}
       <h3
         {% if message.tags %}
@@ -55,7 +55,7 @@
     </section>
     
     <!-- Content -->
-    <main class="w-full max-w-5xl p-2">
+    <main class="w-full max-w-5xl px-4">
       {% block content %}{% endblock content %}
     </main> 
   
